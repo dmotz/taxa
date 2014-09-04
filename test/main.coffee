@@ -62,3 +62,10 @@ describe 'taxa', ->
       (-> fn [1, 2, 3]).should.not.throw()
       (-> fn {}).should.throw()
 
+
+  describe '#.bind()', ->
+
+    it 'should allow partial application with type checking', ->
+      add3 = t('n,n n', add).bind @, 3
+      add3(2).should.equal 5
+
