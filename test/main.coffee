@@ -69,3 +69,9 @@ describe 'taxa', ->
       add3 = t('n,n n', add).bind @, 3
       add3(2).should.equal 5
 
+
+    it 'should allow partial application of all expected arguments', ->
+      add3And4 = t('n,n n', add).bind @, 3, 4
+      add3And4().should.equal 7
+
+

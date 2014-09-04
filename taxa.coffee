@@ -76,7 +76,7 @@ taxa = (sig, fn) ->
   shell.name   = fn.name
   shell.bind   = ->
     i.shift() for a in Array::slice.call arguments, 1
-    i.push ignore unless i.length
+    i.push [ignore: true] unless i.length
 
     Function::bind.apply shell, arguments
 
