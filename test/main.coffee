@@ -47,6 +47,7 @@ describe 'taxa', ->
 
     it 'should allow functions that return no value', ->
       (-> t('s _', ->) 'hi').should.not.throw()
+      (-> t('s u', ->) 'hi').should.not.throw()
 
 
     it 'should allow functions that accept no arguments', ->
