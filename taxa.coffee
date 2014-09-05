@@ -43,13 +43,17 @@ parse = (sig) ->
 
 verify = (def, inst) ->
   for type in def
-    if type.ignore or
-      type.simple and
+
+    if type.ignore
+
+      return true
+
+    if type.simple and
       (type.type is key.a and Array.isArray inst) or
       typeof inst is type.type or
       (type.optional and typeof inst is key.u)
 
-        return true
+      return true
 
   false
 
