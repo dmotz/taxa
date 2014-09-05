@@ -27,6 +27,7 @@ ioSplit  = ' '
 orSplit  = '|'
 optional = '?'
 ignore   = '_'
+strict   = '!'
 suffixRx = /[^A-Z0-9]+$/i
 reserved = Object.keys(key).concat optional, orSplit, ignore
 
@@ -39,6 +40,7 @@ parse = (sig) ->
     optional: optional in suffixes
     simple:   !!key[type] or true
     ignore:   type is ignore
+    strict:   strict in suffixes
 
 
 verify = (def, inst) ->
