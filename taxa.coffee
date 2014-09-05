@@ -60,8 +60,8 @@ taxa = (sig, fn) ->
   shell = ->
     for def, n in i
       unless verify def, arguments[n]
-        throw new Error "#{ libName }: Expected #{ def.type } as argument ##{ n },
-          given #{ typeof arguments[n] } (#{ arguments[n] }) instead."
+        throw new Error "#{ libName }: Expected #{ (def.map (t) -> t.type).join ' or ' }
+          as argument #{ n }, given #{ typeof arguments[n] } (#{ arguments[n] }) instead."
 
     result = fn.apply @, arguments
 
