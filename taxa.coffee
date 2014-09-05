@@ -33,16 +33,16 @@ reserved = Object.keys(key).concat optional, orSplit, ignore
 parse = (sig) ->
   types = sig.split orSplit
   for type in types
-    type:      key[type]
-    optional:  optional is type.slice -1
-    primitive: true
-    ignore:    type is ignore
+    type:     key[type] or type
+    optional: optional is type.slice -1
+    simple:   !!key[type] or true
+    ignore:   type is ignore
 
 
 verify = (def, inst) ->
   for type in def
     if type.ignore or
-      type.primitive and
+      type.simple and
       (type.type is key.a and Array.isArray inst) or
       typeof inst is type.type or
       (type.optional and typeof inst is key.u)
