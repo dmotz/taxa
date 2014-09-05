@@ -16,7 +16,6 @@ describe 'taxa', ->
 
 
     it 'should throw an error unless a signature string and a function are passed', ->
-
       t.should.throw()
       (-> t 1, 2).should.throw()
 
@@ -38,7 +37,7 @@ describe 'taxa', ->
 
 
     it 'should throw an error if the function returns the wrong type', ->
-      (-> t('_ n', sayHello)()).should.throw()
+      t('_ n', sayHello).should.throw()
 
 
     it 'should allow optional arguments', ->
@@ -66,6 +65,12 @@ describe 'taxa', ->
       fn = t 'a a', (a) -> []
       (-> fn [1, 2, 3]).should.not.throw()
       (-> fn {}).should.throw()
+
+
+    it 'should allow disjunctive types', ->
+      fn = t 's|n,n b', (x, l) -> String(x).length >= l
+      (-> fn 123, 3).should.not.throw()
+      (-> fn '123', 3).should.not.throw()
 
 
   describe '#.bind()', ->
