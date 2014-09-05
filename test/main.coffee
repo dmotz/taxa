@@ -10,8 +10,8 @@ describe 'taxa', ->
 
   describe '#taxa()', ->
 
-    it 'should always return a function', ->
 
+    it 'should always return a function', ->
       (typeof t 's b', goodName).should.equal 'function'
 
 
@@ -43,6 +43,10 @@ describe 'taxa', ->
 
     it 'should allow optional arguments', ->
       t('s? b', -> true).should.not.throw()
+
+
+    it 'should throw when optional types do not match', ->
+      (-> t('s? b', -> true) 5).should.throw()
 
 
     it 'should allow functions that return no value', ->
