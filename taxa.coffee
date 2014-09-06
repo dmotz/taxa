@@ -38,16 +38,10 @@ taxa = (sig, fn) ->
 
   shell = ->
     for def, n in i
-      unless verify def, arguments[n]
-        throw new Error "#{ libName }: Expected #{ listTypes def } as argument
-          #{ n }, given #{ typeof arguments[n] } (#{ arguments[n] }) instead."
+      throw makeErr def, arguments[n], n unless verify def, arguments[n]
 
     result = fn.apply @, arguments
-
-    unless verify o, result
-      throw new Error "#{ libName }: Expected #{ listTypes o } as return type,
-        given #{ typeof result } (#{ result }) instead."
-
+    throw makeErr o, result unless verify o, result
     result
 
   shell[k]     = v for k, v of fn
@@ -56,7 +50,6 @@ taxa = (sig, fn) ->
   shell.bind   = ->
     i.shift() for a in Array::slice.call arguments, 1
     i.push [ignore: true] unless i.length
-
     Function::bind.apply shell, arguments
 
   shell
@@ -75,7 +68,6 @@ parse = (sig) ->
 
 verify = (def, val) ->
   for atom in def
-
     if atom.ignore
       return true
 
@@ -95,7 +87,11 @@ verify = (def, val) ->
   false
 
 
-listTypes = (def) -> (def.map (t) -> t.type).join ' or '
+makeErr = (def, val, n) ->
+  new Error "#{ libName }: Expected #{ (def.map (t) -> t.type).join ' or ' } as
+    #{ if n? then 'argument ' +  n else 'return type' }, given
+    #{ if def.simple then typeof val else val?.constructor?.name }
+    #{ if val isnt undefined then '(' + val + ') ' else '' }instead."
 
 
 taxa = taxa 's,f f', taxa
