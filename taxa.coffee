@@ -64,6 +64,9 @@ verify = (def, val) ->
   false
 
 
+listTypes = (def) -> (def.map (t) -> t.type).join ' or '
+
+
 taxa = (sig, fn) ->
   [i, o] = sig.split ioSplit
   i      = (parse s for s in i.split argSplit)
@@ -72,13 +75,13 @@ taxa = (sig, fn) ->
   shell = ->
     for def, n in i
       unless verify def, arguments[n]
-        throw new Error "#{ libName }: Expected #{ (def.map (t) -> t.type).join ' or ' }
-          as argument #{ n }, given #{ typeof arguments[n] } (#{ arguments[n] }) instead."
+        throw new Error "#{ libName }: Expected #{ listTypes def } as argument
+          #{ n }, given #{ typeof arguments[n] } (#{ arguments[n] }) instead."
 
     result = fn.apply @, arguments
 
     unless verify o, result
-      throw new Error "#{ libName }: Expected #{ o.type } as return type,
+      throw new Error "#{ libName }: Expected #{ listTypes o } as return type,
         given #{ typeof result } (#{ result }) instead."
 
     result
