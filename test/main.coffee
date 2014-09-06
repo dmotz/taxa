@@ -99,8 +99,7 @@ describe 'taxa', ->
       bufferMaker = t 'n Buffer', (n) -> new Buffer n
       (-> bufferMaker 1).should.not.throw()
       takesBuffer = t 'Buffer _', ->
-      buff        = bufferMaker 1
-      (-> takesBuffer buff).should.not.throw()
+      (-> takesBuffer bufferMaker 1).should.not.throw()
       (-> takesBuffer 1).should.throw()
 
 
