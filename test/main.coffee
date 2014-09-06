@@ -67,10 +67,24 @@ describe 'taxa', ->
       (-> fn {}).should.throw()
 
 
-    it 'should allow disjunctive types', ->
+    it 'should allow disjunctive types for arguments', ->
       fn = t 's|n,n b', (x, l) -> String(x).length >= l
       (-> fn 123, 3).should.not.throw()
       (-> fn '123', 3).should.not.throw()
+
+
+    it 'should allow disjunctive types for return signatures', ->
+      fn = t 's s|b', (s) ->
+        if s is 'true'
+          true
+        else if s is 'false'
+          false
+        else
+          s
+
+      fn('true').should.equal true
+      fn('false').should.equal false
+      fn('neither').should.equal 'neither'
 
 
   describe '#.bind()', ->
