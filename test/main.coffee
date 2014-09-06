@@ -92,6 +92,7 @@ describe 'taxa', ->
       (-> takesNull null).should.not.throw()
       takesNull.should.throw()
       t('_ 0', ->).should.throw()
+      (-> t('U _', ->) null).should.throw()
 
 
   describe '#.bind()', ->
