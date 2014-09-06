@@ -90,7 +90,7 @@ verify = (def, val) ->
 makeErr = (def, val, n) ->
   new Error "#{ libName }: Expected #{ (def.map (t) -> t.type).join ' or ' } as
     #{ if n? then 'argument ' +  n else 'return type' }, given
-    #{ if def.simple then typeof val else val?.constructor?.name }
+    #{ if def[0].simple then typeof val else val?.constructor?.name }
     #{ if val isnt undefined then '(' + val + ') ' else '' }instead."
 
 
