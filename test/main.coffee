@@ -87,6 +87,13 @@ describe 'taxa', ->
       fn('neither').should.equal 'neither'
 
 
+    it 'should differentiate null from undefined', ->
+      takesNull = t '0 _', ->
+      (-> takesNull null).should.not.throw()
+      takesNull.should.throw()
+      t('_ 0', ->).should.throw()
+
+
   describe '#.bind()', ->
 
     it 'should allow partial application with type checking', ->
