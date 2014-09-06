@@ -1,6 +1,6 @@
 ###
 # Taxa
-# A tiny runtime typing DSL
+# A tiny runtime type-checking DSL
 # 0.0.0
 # Dan Motzenbecker
 # http://oxism.com
@@ -79,8 +79,8 @@ verify = (def, val) ->
     if atom.ignore
       return true
 
-    if atom.type is 'null' and val isnt null
-      continue
+    if atom.type is 'null' and val is null
+      return true
 
     if  atom.simple                                and
         (atom.type is key.a and Array.isArray val) or
