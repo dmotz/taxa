@@ -42,18 +42,23 @@ parse = (sig) ->
     optional: optional in suffixes
 
 
-verify = (def, inst) ->
-  for type in def
+verify = (def, val) ->
+  for atom in def
 
-    if type.ignore
+    if atom.ignore
+      return true
+
+    if atom.type is 'null' and val isnt null
+      continue
+
+    if  atom.simple                                and
+        (atom.type is key.a and Array.isArray val) or
+        (typeof val is atom.type)                  or
+        (atom.optional and typeof val is key.u)
 
       return true
 
-    if type.simple and
-      (type.type is key.a and Array.isArray inst) or
-      typeof inst is type.type or
-      (type.optional and typeof inst is key.u)
-
+    if !atom.simple and val?.constructor?.name is atom.type
       return true
 
   false
