@@ -28,7 +28,6 @@ orSplit  = '|'
 optional = '?'
 ignore   = '_'
 suffixRx = /[^A-Z0-9]+$/i
-reserved = Object.keys(key).concat optional, orSplit, ignore
 
 
 taxa = (sig, fn) ->
