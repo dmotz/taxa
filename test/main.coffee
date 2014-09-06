@@ -95,6 +95,15 @@ describe 'taxa', ->
       (-> t('U _', ->) null).should.throw()
 
 
+    it 'should enforce complex types', ->
+      bufferMaker = t 'n Buffer', (n) -> new Buffer n
+      (-> bufferMaker 1).should.not.throw()
+      takesBuffer = t 'Buffer _', ->
+      buff        = bufferMaker 1
+      (-> takesBuffer buff).should.not.throw()
+      (-> takesBuffer 1).should.throw()
+
+
   describe '#.bind()', ->
 
     it 'should allow partial application with type checking', ->
