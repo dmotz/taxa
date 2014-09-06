@@ -31,6 +31,37 @@ suffixRx = /[^A-Z0-9]+$/i
 reserved = Object.keys(key).concat optional, orSplit, ignore
 
 
+taxa = (sig, fn) ->
+  [i, o] = sig.split ioSplit
+  i      = (parse s for s in i.split argSplit)
+  o      = parse o
+
+  shell = ->
+    for def, n in i
+      unless verify def, arguments[n]
+        throw new Error "#{ libName }: Expected #{ listTypes def } as argument
+          #{ n }, given #{ typeof arguments[n] } (#{ arguments[n] }) instead."
+
+    result = fn.apply @, arguments
+
+    unless verify o, result
+      throw new Error "#{ libName }: Expected #{ listTypes o } as return type,
+        given #{ typeof result } (#{ result }) instead."
+
+    result
+
+  shell[k]     = v for k, v of fn
+  shell.length = fn.length
+  shell.name   = fn.name
+  shell.bind   = ->
+    i.shift() for a in Array::slice.call arguments, 1
+    i.push [ignore: true] unless i.length
+
+    Function::bind.apply shell, arguments
+
+  shell
+
+
 parse = (sig) ->
   types = sig.split orSplit
   for type in types
@@ -65,37 +96,6 @@ verify = (def, val) ->
 
 
 listTypes = (def) -> (def.map (t) -> t.type).join ' or '
-
-
-taxa = (sig, fn) ->
-  [i, o] = sig.split ioSplit
-  i      = (parse s for s in i.split argSplit)
-  o      = parse o
-
-  shell = ->
-    for def, n in i
-      unless verify def, arguments[n]
-        throw new Error "#{ libName }: Expected #{ listTypes def } as argument
-          #{ n }, given #{ typeof arguments[n] } (#{ arguments[n] }) instead."
-
-    result = fn.apply @, arguments
-
-    unless verify o, result
-      throw new Error "#{ libName }: Expected #{ listTypes o } as return type,
-        given #{ typeof result } (#{ result }) instead."
-
-    result
-
-  shell[k]     = v for k, v of fn
-  shell.length = fn.length
-  shell.name   = fn.name
-  shell.bind   = ->
-    i.shift() for a in Array::slice.call arguments, 1
-    i.push [ignore: true] unless i.length
-
-    Function::bind.apply shell, arguments
-
-  shell
 
 
 taxa = taxa 's,f f', taxa
