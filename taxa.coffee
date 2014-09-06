@@ -10,16 +10,16 @@
 libName = 'Taxa'
 
 key =
-  N:   'number'
-  B:   'boolean'
-  S:   'string'
-  F:   'function'
-  O:   'object'
-  A:   'array'
-  U:   'undefined'
   '0': 'null'
+  a:   'array'
+  b:   'boolean'
+  f:   'function'
+  n:   'number'
+  o:   'object'
+  s:   'string'
+  u:   'undefined'
 
-key[k.toLowerCase()] = v for own k, v of key
+key[k.toUpperCase()] = v for own k, v of key
 
 
 argSplit = ','
