@@ -3,6 +3,10 @@
   "version": "0.0.0",
   "description": "A tiny runtime type-checking DSL",
   "main": "taxa.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/dmotz/taxa.git"
+  },
   "scripts": {
     "test": "./node_modules/.bin/mocha --compilers coffee:coffee-script/register -w ./test/main.coffee"
   },
