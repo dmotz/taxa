@@ -1,16 +1,16 @@
 # Taxa
-### A tiny runtime type grammar for JavaScript and CoffeeScript
+### A tiny language inside JavaScript to enforce type signatures
 [Dan Motzenbecker](http://oxism.com), MIT License
 
 [@dcmotz](http://twitter.com/dcmotz)
 
 
-```coffeescript
-add = t 'n,n n', (a, b) -> a + b
-add 3, 7
-# => 10
-add '3', '7'
-# => Taxa: Expected number as argument 0, given string (3) instead.
+```javascript
+add = t('n,n n', function(a, b) { return a + b });
+add(3, 7);
+// => 10
+add('3', '7');
+// => Taxa: Expected number as argument 0, given string (3) instead.
 ```
 
 ## Brief
