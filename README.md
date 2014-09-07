@@ -76,3 +76,121 @@ pluralize(7);
 // => Taxa: Expected string as argument 0, given number (7) instead.
 ```
 
+
+### Shorthand
+
+Taxa provides a shorthand for built-in types, indicated by their first letter.
+The following is equivalent to the previous example:
+
+```coffeescript
+exclaim = t 's s', (word) -> word + '!'
+```
+
+```javascript
+var exclaim = t('s s', function(word) {
+  return word + '!';
+});
+```
+
+Capital letter shorthand works as well:
+
+```coffeescript
+exclaim = t 'S S', (word) -> word + '!'
+```
+
+```javascript
+var exclaim = t('S S', function(word) {
+  return word + '!';
+});
+```
+
+The shorthand mapping is natural, with the exception of `null`:
+
+- `0 => null`
+- `a => array`
+- `b => boolean`
+- `f => function`
+- `n => number`
+- `o => object`
+- `s => string`
+- `u => undefined`
+
+Multiple arguments are separated by commas:
+
+```coffeescipt
+add = t 'n,n n', (a, b) -> a + b
+```
+
+```javascript
+var add = t('n,n n', function(a, b) {
+  return a + b;
+});
+```
+
+The above function is expected to take two numbers as arguments and return a third.
+
+
+### Ignores
+
+Occasionally you may want to ignore type checking on a particular argument.
+Use the `_` character to mark it as ignored in the signature. For example, you may
+have a method that produces effects without returning a value:
+
+```coffeescript
+Population::setCount = t 'n _', (@count) ->
+```
+
+```javascript
+Population.prototype.setCount = t('n _', function(count) {
+  this.count = count;
+});
+```
+
+Or a function that computes a result without input:
+```coffeescript
+t '_ n', -> Math.PI / 2
+```
+
+```javascript
+t('_ n', function() {
+  return Math.PI / 2;
+});
+```
+
+### Optionals
+
+Similarly you can specify arguments as optional and their type will only be
+checked if a value is present:
+
+```coffeescript
+t 's,n? n', (string, radix = 10) -> parseInt string, radix
+```
+
+```javascript
+t('s,n? n', function(string, radix) {
+  if (radix == null) {
+    radix = 10;
+  }
+  return parseInt(string, radix);
+});
+```
+
+### Ors
+
+For polymorphic functions that accept different types of arguments, you can use
+the `|` character to separate types.
+
+```coffeescript
+combine = t 'n|s,n|s n|s', (a, b) -> a + b
+```
+
+```javascript
+var combine = t('n|s,n|s n|s', function(a, b) {
+  return a + b;
+});
+```
+
+For each argument and return type in the above function, either a number or a
+string is accepted.
+
+
