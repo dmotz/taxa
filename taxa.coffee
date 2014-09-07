@@ -1,6 +1,6 @@
 ###
 # Taxa
-# A tiny runtime type-checking DSL
+# A tiny language inside JavaScript to enforce type signatures
 # 0.0.0
 # Dan Motzenbecker
 # http://oxism.com
