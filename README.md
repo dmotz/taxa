@@ -117,7 +117,7 @@ The shorthand mapping is natural, with the exception of `null`:
 
 Multiple arguments are separated by commas:
 
-```coffeescipt
+```coffeescript
 add = t 'n,n n', (a, b) -> a + b
 ```
 
