@@ -4,7 +4,7 @@
   "description": "A tiny runtime type-checking DSL",
   "main": "taxa.js",
   "scripts": {
-    "test": "./node_modules/.bin/mocha -wr coffee-script ./test"
+    "test": "./node_modules/.bin/mocha --compilers coffee:coffee-script/register -w ./test/main.coffee"
   },
   "author": {
     "name": "Dan Motzenbecker",
