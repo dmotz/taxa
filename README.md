@@ -227,3 +227,47 @@ object of another type to a function that expects a specific type (e.g. `WeakMap
 Keep in mind that Taxa is strict with these signatures and will not walk up an
 object's inheritance chain to match ancestral types.
 
+
+## Partial Application
+Like any other function, those annotated with Taxa carry a `bind` method, which
+works as expected with the additional promise of modifying the output function's
+Taxa signature.
+
+For example:
+
+```coffeescript
+add  = t 'n,n n', (a, b) -> a + b
+add2 = add.bind @, 2
+add2 3
+# => 5
+```
+
+```javascript
+var add = t('n,n n', function(a, b) {
+  return a + b;
+});
+var add2 = add.bind(this, 2);
+add2(3);
+// => 5
+```
+
+Under the covers, `add2`'s type signature was changed to `n n`.
+
+
+## Caveats
+
+When a function is modified by Taxa, its arity is not preserved as most JS
+environments don't allow modifying a function's length property. Workarounds to
+this problem would involve using the `Function` constructor which would introduce
+its own problems. This only has implications if you're working with higher order
+functions that work by inspecting arity.
+
+It should go without saying, but this library is experimental and has obvious
+performance implications.
+
+Taxa is young and open to suggestions / contributors.
+
+
+## Name
+From the Ancient Greek τάξις (arrangement, order).
+
