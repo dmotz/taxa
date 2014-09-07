@@ -1,0 +1,21 @@
+{
+  "name": "taxa",
+  "version": "0.0.0",
+  "description": "A tiny runtime type-checking DSL",
+  "main": "taxa.js",
+  "scripts": {
+    "test": "./node_modules/.bin/mocha -wr coffee-script ./test"
+  },
+  "author": {
+    "name": "Dan Motzenbecker",
+    "email": "dan@oxism.com",
+    "url": "http://oxism.com"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "coffee-script": "^1.8.x",
+    "mocha": "1.x.x",
+    "should": "4.x.x"
+  },
+  "keywords": ["type", "types", "strict", "typing", "DSL"]
+}
