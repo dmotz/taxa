@@ -194,3 +194,36 @@ For each argument and return type in the above function, either a number or a
 string is accepted.
 
 
+## Complex Types
+
+If you'd like to enforce types that are more specific than primitives, objects,
+and arrays, you're free to do so:
+
+```coffeescript
+makeDiv = t '_ HTMLDivElement', -> document.createElement 'div'
+```
+
+```javascript
+var makeDiv = t('_ HTMLDivElement', function() {
+  return document.createElement('div');
+});
+```
+***
+```coffeescript
+makeBuffer = t 'n Buffer', (n) -> new Buffer n
+```
+
+```javascript
+var makeBuffer = t('n Buffer', function(n) {
+  return new Buffer(n);
+});
+```
+
+Since all non-primitive types are objects, specifying `o` in your signatures will
+of course match complex types as well. However, passing a plain object or an
+object of another type to a function that expects a specific type (e.g. `WeakMap`)
+ will correctly throw an error.
+
+Keep in mind that Taxa is strict with these signatures and will not walk up an
+object's inheritance chain to match ancestral types.
+
