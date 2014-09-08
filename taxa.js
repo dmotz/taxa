@@ -10,7 +10,7 @@
  */
 
 (function() {
-  var argSplit, ignore, ioSplit, k, key, libName, makeErr, optional, orSplit, parse, suffixRx, taxa, v, verify,
+  var argSplit, ignore, ioSplit, isActive, k, key, libName, makeErr, optional, orSplit, parse, suffixRx, taxa, v, verify,
     __hasProp = {}.hasOwnProperty,
     __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
 
@@ -33,6 +33,8 @@
     key[k.toUpperCase()] = v;
   }
 
+  isActive = true;
+
   argSplit = ',';
 
   ioSplit = ' ';
@@ -47,6 +49,9 @@
 
   taxa = function(sig, fn) {
     var i, o, s, shell, _ref;
+    if (!isActive) {
+      return fn;
+    }
     _ref = sig.split(ioSplit), i = _ref[0], o = _ref[1];
     i = (function() {
       var _i, _len, _ref1, _results;
@@ -143,6 +148,14 @@
   };
 
   taxa = taxa('s,f f', taxa);
+
+  taxa.disable = function() {
+    return isActive = false;
+  };
+
+  taxa.enable = function() {
+    return isActive = true;
+  };
 
   if ((typeof module !== "undefined" && module !== null ? module.exports : void 0) != null) {
     module.exports = taxa;

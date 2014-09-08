@@ -1,7 +1,7 @@
 {
   "name": "taxa",
-  "version": "0.0.1",
-  "description": "A tiny runtime type-checking DSL",
+  "version": "0.0.2",
+  "description": "A tiny language inside JavaScript to enforce type signatures",
   "main": "taxa.js",
   "repository": {
     "type": "git",
