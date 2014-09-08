@@ -115,3 +115,16 @@ describe 'taxa', ->
       add3And4().should.equal 7
 
 
+  describe '#taxa.disable()', ->
+
+    it 'should disable type checking', ->
+      t.disable()
+      t('_ n', sayHello)().should.equal 'hello'
+
+
+  describe '#taxa.enable()', ->
+
+    it 'should enable type checking', ->
+      t.enable()
+      t('_ n', sayHello).should.throw()
+
