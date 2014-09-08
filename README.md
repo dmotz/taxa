@@ -254,6 +254,17 @@ add2(3);
 Under the covers, `add2`'s type signature was changed to `n n`.
 
 
+## Disabling
+
+You can disable Taxa's type enforcement behavior globally by calling `t.disable()`
+(where `t` is whatever you've aliased Taxa as). This will cause calls to `t()` to
+perform a no-op wherein the original function is returned unmodified.
+
+This is convenient for switching between environments without modifying code.
+
+Its counterpart is naturally `t.enable()`.
+
+
 ## Caveats
 
 When a function is modified by Taxa, its arity is not preserved as most JS
