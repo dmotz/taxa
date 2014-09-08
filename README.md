@@ -6,6 +6,7 @@
 
 
 ```javascript
+// denotes that add() accepts two numbers and returns a third:
 add = t('n,n n', function(a, b) { return a + b });
 add(3, 7);
 // => 10
