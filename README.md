@@ -266,6 +266,12 @@ This is convenient for switching between environments without modifying code.
 Its counterpart is naturally `t.enable()`.
 
 
+## Further Examples
+
+Take a look at the test cases in `./test/main.coffee` for more examples of
+Taxa signatures.
+
+
 ## Caveats
 
 When a function is modified by Taxa, its arity is not preserved as most JS
