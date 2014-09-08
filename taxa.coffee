@@ -22,6 +22,7 @@ key =
 key[k.toUpperCase()] = v for own k, v of key
 
 
+isActive = true
 argSplit = ','
 ioSplit  = ' '
 orSplit  = '|'
@@ -31,6 +32,7 @@ suffixRx = /[^A-Z0-9]+$/i
 
 
 taxa = (sig, fn) ->
+  return fn unless isActive
   [i, o] = sig.split ioSplit
   i      = (parse s for s in i.split argSplit)
   o      = parse o
@@ -94,6 +96,10 @@ makeErr = (def, val, n) ->
 
 
 taxa = taxa 's,f f', taxa
+
+
+taxa.disable = -> isActive = false
+taxa.enable  = -> isActive = true
 
 
 if module?.exports?
