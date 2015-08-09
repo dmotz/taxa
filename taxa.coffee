@@ -21,7 +21,7 @@ key =
 
 key[k.toUpperCase()] = v for own k, v of key
 
-
+aliases  = {}
 isActive = true
 argSplit = ','
 ioSplit  = ' '
@@ -61,7 +61,7 @@ parse = (sig) ->
   for type in types
     suffixes = type.match(suffixRx)?[0] or ''
 
-    type:     key[type] or type
+    type:     key[type] or aliases[type] or type
     simple:   !!key[type]
     ignore:   type is ignore
     optional: optional in suffixes
@@ -101,6 +101,12 @@ taxa = taxa 's,f f', taxa
 
 taxa.disable = -> isActive = false
 taxa.enable  = -> isActive = true
+
+taxa.addAlias = taxa 's,s _', (short, long) ->
+  if short of aliases
+    throw makeErr "`#{ short }` is already aliased to `#{ key[short] }`"
+
+  aliases[short] = long
 
 
 if module?.exports?
