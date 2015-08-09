@@ -129,3 +129,14 @@ describe 'taxa', ->
       t.enable()
       t('_ n', sayHello).should.throw()
 
+
+  describe '#taxa.addAlias()', ->
+
+    it 'should allow aliasing other types with abbreviations', ->
+      t.addAlias 'i8', 'Int8Array'
+      (-> t('i8 i8', (a) -> a) new Int8Array).should.not.throw()
+
+
+    it 'should disallow alias collisions', ->
+      (-> t.addAlias 'i8', 'UInt8Array').should.throw()
+
