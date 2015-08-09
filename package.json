@@ -8,6 +8,7 @@
     "url": "git://github.com/dmotz/taxa.git"
   },
   "scripts": {
+    "build": "./node_modules/.bin/coffee -c taxa.coffee",
     "test": "./node_modules/.bin/mocha --compilers coffee:coffee-script/register -w ./test/main.coffee"
   },
   "author": {
