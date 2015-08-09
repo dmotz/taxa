@@ -9,7 +9,8 @@
   },
   "scripts": {
     "build": "./node_modules/.bin/coffee -c taxa.coffee",
-    "test": "./node_modules/.bin/mocha --compilers coffee:coffee-script/register -w ./test/main.coffee"
+    "test": "./node_modules/.bin/mocha --compilers coffee:coffee-script/register -w ./test/main.coffee",
+    "watch": "./node_modules/.bin/coffee -cw taxa.coffee"
   },
   "author": {
     "name": "Dan Motzenbecker",
