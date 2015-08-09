@@ -140,3 +140,13 @@ describe 'taxa', ->
     it 'should disallow alias collisions', ->
       (-> t.addAlias 'i8', 'UInt8Array').should.throw()
 
+
+  describe '#taxa.removeAlias()', ->
+
+    it 'should allow alias removal', ->
+      t.removeAlias 'i8'
+      (-> t('i8 i8', (a) -> a) new Int8Array).should.throw()
+
+    it 'should throw when removing an unregistered alias', ->
+      (-> t.removeAlias 'i8').should.throw()
+
