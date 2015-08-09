@@ -1,7 +1,7 @@
 ###
 # Taxa
 # A tiny language inside JavaScript to enforce type signatures
-# 0.0.0
+# 0.0.3
 # Dan Motzenbecker
 # http://oxism.com
 # Copyright 2014, MIT License
