@@ -39,10 +39,10 @@ taxa = (sig, fn) ->
 
   shell = ->
     for def, n in i
-      throw makeErr def, arguments[n], n unless verify def, arguments[n]
+      throw typeErr def, arguments[n], n unless verify def, arguments[n]
 
     result = fn.apply @, arguments
-    throw makeErr o, result unless verify o, result
+    throw typeErr o, result unless verify o, result
     result
 
   shell[k]     = v for k, v of fn
@@ -87,9 +87,10 @@ verify = (def, val) ->
 
   false
 
+makeErr = (s) -> new Error libName + ': ' + s
 
-makeErr = (def, val, n) ->
-  new Error "#{ libName }: Expected #{ (def.map (t) -> t.type).join ' or ' } as
+typeErr = (def, val, n) ->
+  makeErr "Expected #{ (def.map (t) -> t.type).join ' or ' } as
     #{ if n? then 'argument ' +  n else 'return type' }, given
     #{ if def[0].simple then typeof val else val?.constructor?.name }
     #{ if val isnt undefined then '(' + val + ') ' else '' }instead."
