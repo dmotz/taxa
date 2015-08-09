@@ -1,5 +1,6 @@
 require 'should'
-t = require '../taxa'
+require 'coffee-script/register'
+t = require '../taxa.coffee'
 
 goodName = (name) -> name.length > 3
 add      = (a, b) -> a + b
