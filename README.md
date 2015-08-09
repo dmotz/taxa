@@ -255,6 +255,29 @@ add2(3);
 Under the covers, `add2`'s type signature was changed to `n n`.
 
 
+## Aliases
+
+You can add your own custom shorthand aliases like this:
+
+```coffeescript
+t.addAlias 'i8', 'Int8Array'
+```
+
+```javascript
+t.addAlias('i8', 'Int8Array');
+```
+
+And remove them as well:
+
+```coffeescript
+t.removeAlias 'i8'
+```
+
+```javascript
+t.removeAlias('i8');
+```
+
+
 ## Disabling
 
 You can disable Taxa's type enforcement behavior globally by calling `t.disable()`
