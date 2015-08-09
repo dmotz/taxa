@@ -109,6 +109,13 @@ taxa.addAlias = taxa 's,s _', (short, long) ->
   aliases[short] = long
 
 
+taxa.removeAlias = taxa 's _', (short) ->
+  if short not of aliases
+    throw makeErr "`#{ short }` is not a registered alias"
+
+  delete aliases[short]
+
+
 if module?.exports?
   module.exports = taxa
 else
